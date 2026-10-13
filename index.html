@@ -1,0 +1,1606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AURELIA EST. 2015 — Authentic Flavours</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #0d0c0a;
+      --bg-card: #151411;
+      --bg-card-border: #26231d;
+      --orange: #f28705;
+      --orange-gradient: linear-gradient(135deg, #f59e0b 0%, #ea580c 100%);
+      --gold-title: #fce8bd;
+      --text-white: #ffffff;
+      --text-dim: #9e9b94;
+      --transition: all 0.25s ease-in-out;
+    }
+
+    [data-theme="light"] {
+      --bg: #f8f6f0;
+      --bg-card: #ffffff;
+      --bg-card-border: #e6dfd3;
+      --orange: #d97706;
+      --gold-title: #1f1b13;
+      --text-white: #171512;
+      --text-dim: #6b665c;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-white);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      line-height: 1.5;
+      overflow-x: hidden;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; object-fit: cover; }
+
+    .container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .title-serif {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .badge-sub {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--orange);
+      text-transform: uppercase;
+      display: inline-block;
+      margin-bottom: 12px;
+    }
+
+    /* Navbar */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(13, 12, 10, 0.94);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    [data-theme="light"] header {
+      background: rgba(248, 246, 240, 0.94);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    }
+
+    .nav-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 76px;
+    }
+
+    .brand-logo {
+      font-family: 'Cinzel', serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--orange);
+      letter-spacing: 1.5px;
+      cursor: pointer;
+    }
+
+    .brand-logo span {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 500;
+      margin-left: 6px;
+      letter-spacing: 2px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--text-dim);
+      transition: var(--transition);
+      cursor: pointer;
+    }
+
+    .nav-links a:hover {
+      color: var(--orange);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .icon-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--bg-card);
+      border: 1px solid var(--bg-card-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.95rem;
+      color: var(--text-white);
+      position: relative;
+      user-select: none;
+      transition: var(--transition);
+    }
+
+    .icon-btn:hover {
+      border-color: var(--orange);
+      transform: scale(1.05);
+    }
+
+    .cart-badge {
+      position: absolute;
+      top: -4px;
+      right: -4px;
+      background: var(--orange);
+      color: #000;
+      font-size: 0.65rem;
+      font-weight: 800;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn-reserve {
+      background: var(--orange-gradient);
+      color: #120e06;
+      font-weight: 700;
+      font-size: 0.82rem;
+      padding: 10px 22px;
+      border-radius: 24px;
+      box-shadow: 0 4px 18px rgba(245, 158, 11, 0.35);
+      border: none;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-reserve:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 22px rgba(245, 158, 11, 0.55);
+    }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      padding: 75px 0 95px;
+      text-align: center;
+      background: linear-gradient(180deg, rgba(13,12,10,0.78) 0%, rgba(13,12,10,0.96) 100%),
+                  url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+    }
+
+    .hero-badges {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+    }
+
+    .pill-badge {
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 30px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .pill-green {
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.4);
+    }
+
+    .pill-gold {
+      background: rgba(245, 158, 11, 0.15);
+      color: #fbbf24;
+      border: 1px solid rgba(245, 158, 11, 0.4);
+    }
+
+    .hero-h1 {
+      font-size: 4rem;
+      line-height: 1.12;
+      color: #f7eed7;
+      text-transform: uppercase;
+      max-width: 950px;
+      margin: 0 auto 10px;
+    }
+
+    .hero-h1 em {
+      display: block;
+      color: #fca727;
+      font-style: italic;
+      font-weight: 700;
+    }
+
+    .hero-p {
+      color: #b5b0a7;
+      font-size: 0.95rem;
+      max-width: 650px;
+      margin: 20px auto 32px;
+    }
+
+    .hero-btns {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+    }
+
+    .btn-primary-glow {
+      background: var(--orange-gradient);
+      color: #1a1102;
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 12px 26px;
+      border-radius: 26px;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--transition);
+    }
+
+    .btn-primary-glow:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
+    }
+
+    .btn-secondary-outline {
+      background: rgba(255, 255, 255, 0.05);
+      color: #f0ece1;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 12px 26px;
+      border-radius: 26px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--transition);
+    }
+
+    .btn-secondary-outline:hover {
+      border-color: var(--orange);
+      color: var(--orange);
+    }
+
+    /* Heritage */
+    .heritage-sec {
+      padding: 85px 0 100px;
+    }
+
+    .heritage-layout {
+      display: grid;
+      grid-template-columns: 460px 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .heritage-img-box {
+      position: relative;
+    }
+
+    .heritage-img {
+      width: 100%;
+      height: 480px;
+      border-radius: 8px;
+      border: 1px solid var(--bg-card-border);
+      object-fit: cover;
+    }
+
+    .chef-badge {
+      position: absolute;
+      bottom: 24px;
+      left: 24px;
+      background: rgba(17, 16, 13, 0.94);
+      border: 1px solid #363024;
+      padding: 14px 22px;
+      border-radius: 6px;
+      backdrop-filter: blur(10px);
+    }
+
+    .chef-badge h4 {
+      font-size: 1.1rem;
+      color: var(--orange);
+      font-family: 'Cinzel', serif;
+      letter-spacing: 1px;
+    }
+
+    .chef-badge p {
+      font-size: 0.62rem;
+      letter-spacing: 2px;
+      color: #9c978e;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    .heritage-content h2 {
+      font-size: 2.7rem;
+      line-height: 1.18;
+      color: var(--gold-title);
+      margin-bottom: 22px;
+    }
+
+    .heritage-content p {
+      color: var(--text-dim);
+      font-size: 0.9rem;
+      margin-bottom: 18px;
+      line-height: 1.7;
+    }
+
+    .read-more-btn {
+      display: inline-block;
+      margin-top: 10px;
+      color: var(--text-white);
+      font-size: 0.85rem;
+      font-weight: 600;
+      border: 1px solid var(--bg-card-border);
+      padding: 9px 20px;
+      border-radius: 20px;
+      background: var(--bg-card);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .read-more-btn:hover {
+      border-color: var(--orange);
+      color: var(--orange);
+    }
+
+    /* Menu & Filter */
+    .menu-sec {
+      padding: 40px 0 90px;
+    }
+
+    .search-bar-wrap {
+      max-width: 500px;
+      margin: 0 auto 28px;
+      position: relative;
+    }
+
+    .search-input {
+      width: 100%;
+      background: var(--bg-card);
+      border: 1px solid var(--bg-card-border);
+      padding: 12px 18px 12px 42px;
+      border-radius: 30px;
+      color: var(--text-white);
+      font-size: 0.82rem;
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .search-input:focus {
+      border-color: var(--orange);
+      box-shadow: 0 0 12px rgba(242, 135, 5, 0.2);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-dim);
+      font-size: 0.85rem;
+    }
+
+    .menu-categories {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+
+    .category-pill {
+      background: var(--bg-card);
+      border: 1px solid var(--bg-card-border);
+      color: var(--text-dim);
+      font-size: 0.74rem;
+      font-weight: 600;
+      padding: 8px 18px;
+      border-radius: 22px;
+      cursor: pointer;
+      transition: var(--transition);
+      outline: none;
+    }
+
+    .category-pill:hover {
+      color: var(--text-white);
+      border-color: var(--orange);
+    }
+
+    .category-pill.active {
+      background: var(--orange-gradient) !important;
+      color: #120e06 !important;
+      border-color: transparent !important;
+      box-shadow: 0 4px 14px rgba(245, 158, 11, 0.3);
+    }
+
+    .menu-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 22px;
+    }
+
+    .food-card {
+      background: var(--bg-card);
+      border: 1px solid var(--bg-card-border);
+      border-radius: 10px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: var(--transition);
+    }
+
+    .food-card:hover {
+      border-color: rgba(242, 135, 5, 0.4);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.5);
+    }
+
+    .food-thumb-wrap {
+      position: relative;
+      height: 200px;
+      width: 100%;
+      overflow: hidden;
+      background: #1e1c17;
+    }
+
+    .food-thumb {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .food-card:hover .food-thumb {
+      transform: scale(1.05);
+    }
+
+    .tag-ribbon {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: rgba(18, 17, 14, 0.88);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 3px 10px;
+      border-radius: 14px;
+      font-size: 0.65rem;
+      font-weight: 600;
+      color: #fce8bd;
+      backdrop-filter: blur(6px);
+      z-index: 2;
+    }
+
+    .heart-fav {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: rgba(18, 17, 14, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #9e9b94;
+      font-size: 0.9rem;
+      cursor: pointer;
+      user-select: none;
+      z-index: 2;
+      transition: var(--transition);
+    }
+
+    .heart-fav.liked {
+      color: #ef4444;
+      border-color: #ef4444;
+      transform: scale(1.15);
+    }
+
+    .food-card-info {
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .food-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 6px;
+    }
+
+    .food-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-white);
+      letter-spacing: 0.5px;
+    }
+
+    .food-price {
+      font-size: 1.15rem;
+      color: var(--orange);
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+    }
+
+    .food-desc {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      margin-bottom: 18px;
+      flex: 1;
+      line-height: 1.5;
+    }
+
+    .food-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.04);
+      padding-top: 12px;
+    }
+
+    .recipe-meta {
+      font-size: 0.68rem;
+      color: var(--text-dim);
+      font-style: italic;
+    }
+
+    .btn-add-order {
+      background: var(--orange-gradient);
+      color: #171103;
+      border: none;
+      padding: 7px 15px;
+      border-radius: 18px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-add-order:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.35);
+    }
+
+    /* Ambience */
+    .ambience-sec {
+      padding: 85px 0 95px;
+      text-align: center;
+    }
+
+    .ambience-sec h2 {
+      font-size: 2.8rem;
+      color: var(--gold-title);
+      margin-bottom: 12px;
+    }
+
+    .ambience-sec p {
+      font-size: 0.88rem;
+      color: var(--text-dim);
+      max-width: 600px;
+      margin: 0 auto 40px;
+    }
+
+    .ambience-gallery {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .gallery-item {
+      height: 270px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--bg-card-border);
+      background: var(--bg-card);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.08);
+    }
+
+    /* Reviews */
+    .reviews-sec {
+      padding: 80px 0 95px;
+      text-align: center;
+    }
+
+    .reviews-sec h2 {
+      font-size: 2.8rem;
+      color: var(--gold-title);
+      margin-bottom: 12px;
+    }
+
+    .reviews-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      margin-top: 40px;
+    }
+
+    .quote-card {
+      background: var(--bg-card);
+      border: 1px solid var(--bg-card-border);
+      border-radius: 10px;
+      padding: 28px 24px;
+      text-align: left;
+    }
+
+    .quote-stars {
+      color: var(--orange);
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      margin-bottom: 14px;
+    }
+
+    .quote-body {
+      font-style: italic;
+      font-size: 0.84rem;
+      color: var(--text-white);
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    .author-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .avatar-img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid var(--orange);
+    }
+
+    .author-name {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--gold-title);
+    }
+
+    .author-role {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+    }
+
+    /* Location */
+    .location-sec {
+      padding: 80px 0 110px;
+      text-align: center;
+    }
+
+    .location-sec h2 {
+      font-size: 2.8rem;
+      color: var(--gold-title);
+      margin-bottom: 45px;
+    }
+
+    .location-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 26px;
+      max-width: 1050px;
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    .loc-card {
+      background: var(--bg-card);
+      border: 1px solid var(--bg-card-border);
+      border-radius: 14px;
+      padding: 34px 30px;
+    }
+
+    .info-item {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .info-icon {
+      font-size: 1.1rem;
+      color: var(--orange);
+      line-height: 1.4;
+    }
+
+    .info-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-white);
+      margin-bottom: 4px;
+    }
+
+    .info-detail {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      line-height: 1.5;
+    }
+
+    .contact-btns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .btn-call {
+      background: var(--orange-gradient);
+      color: #120e06;
+      border: none;
+      padding: 11px;
+      border-radius: 24px;
+      font-weight: 700;
+      font-size: 0.8rem;
+      text-align: center;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-whatsapp {
+      background: transparent;
+      color: var(--text-white);
+      border: 1px solid var(--bg-card-border);
+      padding: 11px;
+      border-radius: 24px;
+      font-weight: 600;
+      font-size: 0.8rem;
+      text-align: center;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-call:hover, .btn-whatsapp:hover {
+      transform: translateY(-2px);
+    }
+
+    .map-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 40px 30px;
+    }
+
+    .map-title {
+      font-size: 1.25rem;
+      color: var(--gold-title);
+      font-family: 'Cinzel', serif;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+
+    .map-desc {
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      max-width: 360px;
+      margin-bottom: 26px;
+      line-height: 1.5;
+    }
+
+    .btn-directions {
+      background: var(--orange-gradient);
+      color: #120e06;
+      border: none;
+      padding: 12px 28px;
+      border-radius: 26px;
+      font-weight: 700;
+      font-size: 0.82rem;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    /* Modal Form */
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(8px);
+      z-index: 2000;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .modal-backdrop.active {
+      display: flex;
+    }
+
+    .modal-box {
+      background: var(--bg-card);
+      border: 1px solid var(--orange);
+      padding: 34px 28px;
+      border-radius: 12px;
+      width: 100%;
+      max-width: 480px;
+      position: relative;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 14px;
+      right: 18px;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: var(--text-dim);
+      cursor: pointer;
+    }
+
+    .modal-close:hover {
+      color: var(--orange);
+    }
+
+    .form-row {
+      margin-bottom: 16px;
+    }
+
+    .form-row label {
+      display: block;
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .form-row input, .form-row select {
+      width: 100%;
+      padding: 11px 14px;
+      background: var(--bg);
+      border: 1px solid var(--bg-card-border);
+      color: var(--text-white);
+      border-radius: 6px;
+      outline: none;
+      font-size: 0.85rem;
+    }
+
+    .form-row input:focus, .form-row select:focus {
+      border-color: var(--orange);
+    }
+
+    .btn-modal-submit {
+      width: 100%;
+      background: var(--orange-gradient);
+      color: #000;
+      font-weight: 700;
+      padding: 12px;
+      border-radius: 24px;
+      border: none;
+      cursor: pointer;
+      font-size: 0.88rem;
+      margin-top: 10px;
+    }
+
+    /* Cart Drawer Sidepanel */
+    .cart-drawer {
+      position: fixed;
+      top: 0;
+      right: -380px;
+      width: 360px;
+      height: 100vh;
+      background: var(--bg-card);
+      border-left: 1px solid var(--bg-card-border);
+      z-index: 2500;
+      box-shadow: -10px 0 30px rgba(0,0,0,0.7);
+      transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+      padding: 24px;
+    }
+
+    .cart-drawer.open {
+      right: 0;
+    }
+
+    .cart-drawer-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--bg-card-border);
+      padding-bottom: 16px;
+      margin-bottom: 20px;
+    }
+
+    .cart-drawer-header h3 {
+      font-family: 'Cinzel', serif;
+      color: var(--orange);
+      font-size: 1.2rem;
+    }
+
+    .cart-items-list {
+      flex: 1;
+      overflow-y: auto;
+      list-style: none;
+    }
+
+    .cart-item-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 0.82rem;
+    }
+
+    .cart-item-name {
+      font-weight: 600;
+      color: var(--text-white);
+    }
+
+    .cart-item-price {
+      color: var(--orange);
+      font-weight: 700;
+    }
+
+    .cart-footer {
+      border-top: 1px solid var(--bg-card-border);
+      padding-top: 18px;
+    }
+
+    .cart-total-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .cart-total-row span:last-child {
+      color: var(--orange);
+    }
+
+    /* Toast */
+    .toast-msg {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--bg-card);
+      border-left: 4px solid var(--orange);
+      color: var(--text-white);
+      padding: 12px 20px;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+      z-index: 3000;
+    }
+
+    .toast-msg.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    @media (max-width: 992px) {
+      .heritage-layout { grid-template-columns: 1fr; }
+      .ambience-gallery { grid-template-columns: repeat(2, 1fr); }
+      .reviews-cards { grid-template-columns: 1fr; }
+      .location-grid { grid-template-columns: 1fr; }
+      .hero-h1 { font-size: 2.7rem; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body data-theme="dark">
+
+  <!-- Header -->
+  <header>
+    <div class="container nav-bar">
+      <div class="brand-logo" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+        AURELIA <span>EST. 2015</span>
+      </div>
+
+      <ul class="nav-links">
+        <li><a onclick="scrollToSection('story')">Story</a></li>
+        <li><a onclick="scrollToSection('menu')">Menu</a></li>
+        <li><a onclick="scrollToSection('chef')">Chef's Table</a></li>
+        <li><a onclick="scrollToSection('ambience')">Ambiance</a></li>
+        <li><a onclick="scrollToSection('reviews')">Reviews</a></li>
+        <li><a onclick="scrollToSection('location')">Location</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <div class="icon-btn" id="themeToggle" title="Toggle Theme" onclick="toggleTheme()">🌙</div>
+        <div class="icon-btn" id="cartBtn" title="View Cart" onclick="toggleCartDrawer()">
+          🛒
+          <span class="cart-badge" id="cartCount">0</span>
+        </div>
+        <button class="btn-reserve" onclick="openBookingModal()">Reserve Table</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" id="story">
+    <div class="container">
+      <div class="hero-badges">
+        <span class="pill-badge pill-green">• Currently Open • Dine-In & Delivery</span>
+        <span class="pill-badge pill-gold">★ 4.9 (1,240+ Diners)</span>
+        <span class="pill-badge pill-gold">Hours: 12:00 PM – 11:30 PM</span>
+      </div>
+
+      <h1 class="hero-h1 title-serif">
+        AUTHENTIC FLAVOURS,
+        <em>UNFORGETTABLE MOMENTS</em>
+      </h1>
+
+      <p class="hero-p">
+        Handcrafted wood-fired pizzas, house-extruded bronze-cut pastas, and signature charcoal-grilled cuts prepared with Italian passion since 2015.
+      </p>
+
+      <div class="hero-btns">
+        <button class="btn-primary-glow" onclick="scrollToSection('menu')">View Full Menu ➔</button>
+        <button class="btn-secondary-outline" onclick="openBookingModal()">Book A Table 🍷</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Our Heritage Section -->
+  <section class="heritage-sec" id="chef">
+    <div class="container heritage-layout">
+      <div class="heritage-img-box">
+        <img class="heritage-img" src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?auto=format&fit=crop&w=800&q=80" alt="Executive Chef Marco">
+        <div class="chef-badge">
+          <h4>SINCE 2015</h4>
+          <p>DECADE OF CULINARY CRAFT</p>
+        </div>
+      </div>
+
+      <div class="heritage-content">
+        <span class="badge-sub">OUR HERITAGE</span>
+        <h2 class="title-serif">A JOURNEY THROUGH TUSCAN GASTRONOMY</h2>
+        <p>Aurelia began with a simple philosophy: honor centuries-old Italian cooking techniques while sourcing regional organic produce. Every pasta strand is bronze-die extruded in our open kitchen, and our sour ferment rests for 48 hours before baking in 900°F oak ovens.</p>
+        <p>Whether you join us for an intimate anniversary dinner, a celebratory family gathering, or a glass of vintage Chianti at the bar, we welcome you to our table.</p>
+        <button class="read-more-btn" onclick="scrollToSection('story')">Read Our Full Story ➔</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Curated Menu Section -->
+  <section class="menu-sec" id="menu">
+    <div class="container">
+      
+      <!-- Live Search -->
+      <div class="search-bar-wrap">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="dishSearch" class="search-input" placeholder="Search dishes (e.g., Truffle, Margherita, Burrata)..." oninput="runSearch(this.value)">
+      </div>
+
+      <!-- Category Filter Pills -->
+      <div class="menu-categories" id="filterTabs">
+        <button class="category-pill active" onclick="applyCategory('all', this)">All Offerings</button>
+        <button class="category-pill" onclick="applyCategory('starters', this)">Starters</button>
+        <button class="category-pill" onclick="applyCategory('pizza', this)">Wood-Fired Pizza</button>
+        <button class="category-pill" onclick="applyCategory('pasta', this)">Handmade Pasta</button>
+        <button class="category-pill" onclick="applyCategory('dessert', this)">Desserts & Dolci</button>
+        <button class="category-pill" onclick="applyCategory('drinks', this)">Beverages & Wine</button>
+      </div>
+
+      <!-- Dish Cards Grid -->
+      <div class="menu-cards-grid" id="menuGrid">
+        
+        <!-- Dish 1: Margherita Pizza -->
+        <div class="food-card" data-category="pizza" data-title="MARGHERITA DI BUFALA">
+          <div class="food-thumb-wrap">
+            <span class="tag-ribbon">Chef's Choice</span>
+            <div class="heart-fav" onclick="toggleHeart(this)">♥</div>
+            <img class="food-thumb" src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=700&q=80" alt="Margherita Di Bufala">
+          </div>
+          <div class="food-card-info">
+            <div class="food-header">
+              <h3 class="food-title">MARGHERITA DI BUFALA</h3>
+              <span class="food-price">$24</span>
+            </div>
+            <p class="food-desc">San Marzano D.O.P. tomatoes, fresh buffalo mozzarella, hand-torn sweet basil, cold-pressed olive oil.</p>
+            <div class="food-footer">
+              <span class="recipe-meta">Artisanal Recipe</span>
+              <button class="btn-add-order" onclick="addToCart('Margherita Di Bufala', 24)">+ Add to Order</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dish 2: Truffle Tagliolini Pasta -->
+        <div class="food-card" data-category="pasta" data-title="NORCIA TRUFFLE TAGLIOLINI">
+          <div class="food-thumb-wrap">
+            <span class="tag-ribbon">Bestseller</span>
+            <div class="heart-fav" onclick="toggleHeart(this)">♥</div>
+            <img class="food-thumb" src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=700&q=80" alt="Norcia Truffle Tagliolini">
+          </div>
+          <div class="food-card-info">
+            <div class="food-header">
+              <h3 class="food-title">NORCIA TRUFFLE TAGLIOLINI</h3>
+              <span class="food-price">$36</span>
+            </div>
+            <p class="food-desc">Bronze-die extruded egg tagliolini, 36-mo aged Parmigiano Reggiano, shaved black winter truffles.</p>
+            <div class="food-footer">
+              <span class="recipe-meta">Artisanal Recipe</span>
+              <button class="btn-add-order" onclick="addToCart('Norcia Truffle Tagliolini', 36)">+ Add to Order</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dish 3: Burrata Pugliese -->
+        <div class="food-card" data-category="starters" data-title="BURRATA PUGLIESE">
+          <div class="food-thumb-wrap">
+            <span class="tag-ribbon">Fresh</span>
+            <div class="heart-fav" onclick="toggleHeart(this)">♥</div>
+            <img class="food-thumb" src="https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=700&q=80" alt="Burrata Pugliese">
+          </div>
+          <div class="food-card-info">
+            <div class="food-header">
+              <h3 class="food-title">BURRATA PUGLIESE</h3>
+              <span class="food-price">$21</span>
+            </div>
+            <p class="food-desc">Creamy artisanal whole burrata, roasted heirloom cherry tomatoes, aged Modena balsamic reduction.</p>
+            <div class="food-footer">
+              <span class="recipe-meta">Seasonal Special</span>
+              <button class="btn-add-order" onclick="addToCart('Burrata Pugliese', 21)">+ Add to Order</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dish 4: Diavola Piccante -->
+        <div class="food-card" data-category="pizza" data-title="DIAVOLA PICCANTE">
+          <div class="food-thumb-wrap">
+            <span class="tag-ribbon">Spicy</span>
+            <div class="heart-fav" onclick="toggleHeart(this)">♥</div>
+            <img class="food-thumb" src="https://images.unsplash.com/photo-1534308983496-4fabb1a015ee?auto=format&fit=crop&w=700&q=80" alt="Diavola Piccante">
+          </div>
+          <div class="food-card-info">
+            <div class="food-header">
+              <h3 class="food-title">DIAVOLA PICCANTE</h3>
+              <span class="food-price">$27</span>
+            </div>
+            <p class="food-desc">Smoked provolone, Calabrian spicy soppressata, crushed chili crisp, aged hot blossom honey.</p>
+            <div class="food-footer">
+              <span class="recipe-meta">Wood-Fired Oak</span>
+              <button class="btn-add-order" onclick="addToCart('Diavola Piccante', 27)">+ Add to Order</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dish 5: Chianti Classico Riserva -->
+        <div class="food-card" data-category="drinks" data-title="CHIANTI CLASSICO RISERVA">
+          <div class="food-thumb-wrap">
+            <span class="tag-ribbon">Vintage 2019</span>
+            <div class="heart-fav" onclick="toggleHeart(this)">♥</div>
+            <img class="food-thumb" src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=700&q=80" alt="Chianti Classico Riserva">
+          </div>
+          <div class="food-card-info">
+            <div class="food-header">
+              <h3 class="food-title">CHIANTI CLASSICO RISERVA</h3>
+              <span class="food-price">$65</span>
+            </div>
+            <p class="food-desc">Full-bodied Tuscan reserve red wine with violet notes and structured oak tannins.</p>
+            <div class="food-footer">
+              <span class="recipe-meta">Cellar Reserve</span>
+              <button class="btn-add-order" onclick="addToCart('Chianti Classico Riserva', 65)">+ Add to Order</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dish 6: Aperol Sunset Spritz -->
+        <div class="food-card" data-category="drinks" data-title="APEROL SUNSET SPRITZ">
+          <div class="food-thumb-wrap">
+            <span class="tag-ribbon">Aperitivo</span>
+            <div class="heart-fav" onclick="toggleHeart(this)">♥</div>
+            <img class="food-thumb" src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=700&q=80" alt="Aperol Sunset Spritz">
+          </div>
+          <div class="food-card-info">
+            <div class="food-header">
+              <h3 class="food-title">APEROL SUNSET SPRITZ</h3>
+              <span class="food-price">$18</span>
+            </div>
+            <p class="food-desc">Aperol aperitivo, Prosecco Superiore D.O.C.G., splash of sparkling mineral water, flamed orange slice.</p>
+            <div class="food-footer">
+              <span class="recipe-meta">Handcrafted Drink</span>
+              <button class="btn-add-order" onclick="addToCart('Aperol Sunset Spritz', 18)">+ Add to Order</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dish 7: Tiramisu Tradizionale -->
+        <div class="food-card" data-category="dessert" data-title="TIRAMISU TRADIZIONALE">
+          <div class="food-thumb-wrap">
+            <span class="tag-ribbon">Dolci</span>
+            <div class="heart-fav" onclick="toggleHeart(this)">♥</div>
+            <img class="food-thumb" src="https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?auto=format&fit=crop&w=700&q=80" alt="Tiramisu Tradizionale">
+          </div>
+          <div class="food-card-info">
+            <div class="food-header">
+              <h3 class="food-title">TIRAMISU TRADIZIONALE</h3>
+              <span class="food-price">$16</span>
+            </div>
+            <p class="food-desc">Savoiardi ladyfingers soaked in dark espresso, layered with whipped mascarpone cream & Valrhona cocoa.</p>
+            <div class="food-footer">
+              <span class="recipe-meta">Venetian Recipe</span>
+              <button class="btn-add-order" onclick="addToCart('Tiramisu Tradizionale', 16)">+ Add to Order</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Ambience Section -->
+  <section class="ambience-sec" id="ambience">
+    <div class="container">
+      <span class="badge-sub">THE AMBIENCE</span>
+      <h2 class="title-serif">STEP INSIDE AURELIA</h2>
+      <p>Immerse yourself in warm Mediterranean oak interiors and intimate candlelight dining.</p>
+
+      <div class="ambience-gallery">
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=600&q=80" alt="White Table Setting">
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1543007630-9710e4a00a20?auto=format&fit=crop&w=600&q=80" alt="Friends Toasting Wine">
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=600&q=80" alt="Mediterranean Dining Hall">
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?auto=format&fit=crop&w=600&q=80" alt="Intimate Bar Setting">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Guest Impressions -->
+  <section class="reviews-sec" id="reviews">
+    <div class="container">
+      <span class="badge-sub">GUEST IMPRESSIONS</span>
+      <h2 class="title-serif">LOVED BY CONNOISSEURS</h2>
+      <p style="color: var(--text-dim); font-size: 0.85rem;">Verified reviews from local and international guests.</p>
+
+      <div class="reviews-cards">
+        <div class="quote-card">
+          <div class="quote-stars">★★★★★</div>
+          <p class="quote-body">"The truffle tagliolini was simply out of this world. The ambience with candlelight and soft jazz creates an evening you never want to end."</p>
+          <div class="author-wrap">
+            <img class="avatar-img" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" alt="Sophia Chen">
+            <div>
+              <div class="author-name">Sophia Chen</div>
+              <div class="author-role">Food & Wine Critic</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="quote-card">
+          <div class="quote-stars">★★★★★</div>
+          <p class="quote-body">"Authentic Neapolitan blistered crust on the pizzas. Easily the finest Italian dining experience in the state. Don't skip the traditional tiramisu!"</p>
+          <div class="author-wrap">
+            <img class="avatar-img" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80" alt="Marcus Sterling">
+            <div>
+              <div class="author-name">Marcus Sterling</div>
+              <div class="author-role">Verified Diner (14 Visits)</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="quote-card">
+          <div class="quote-stars">★★★★★</div>
+          <p class="quote-body">"Hosted our 10th anniversary in their private cellar. Impeccable sommelier pairing and five-star hospitality from Chef Marco's brigade."</p>
+          <div class="author-wrap">
+            <img class="avatar-img" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&q=80" alt="Elena Rostova">
+            <div>
+              <div class="author-name">Elena Rostova</div>
+              <div class="author-role">Private Dining Guest</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Location & Hours -->
+  <section class="location-sec" id="location">
+    <div class="container">
+      <span class="badge-sub">FIND OUR TABLES</span>
+      <h2 class="title-serif">LOCATION & HOURS</h2>
+
+      <div class="location-grid">
+        <div class="loc-card">
+          <div class="info-item">
+            <span class="info-icon">📍</span>
+            <div>
+              <div class="info-title">Restaurant Address</div>
+              <div class="info-detail">482 Via Firenze, Culinary Quarter, Central District</div>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <span class="info-icon">⏰</span>
+            <div>
+              <div class="info-title">Service Hours</div>
+              <div class="info-detail">
+                Lunch: 12:00 PM – 03:30 PM<br>
+                Dinner: 06:30 PM – 11:30 PM
+              </div>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <span class="info-icon">📞</span>
+            <div>
+              <div class="info-title">Direct Reservations</div>
+              <div class="info-detail">+1 (555) 839-2041 • contact@aurelia-dining.com</div>
+            </div>
+          </div>
+
+          <div class="contact-btns">
+            <button class="btn-call" onclick="window.location.href='tel:+15558392041'">Call Direct</button>
+            <button class="btn-whatsapp" onclick="window.open('https://wa.me/15558392041', '_blank')">WhatsApp</button>
+          </div>
+        </div>
+
+        <div class="loc-card map-card">
+          <h3 class="map-title">INTERACTIVE LOCATION MAP</h3>
+          <p class="map-desc">Located adjacent to the Grand Promenade Fountain with valet parking service.</p>
+          <button class="btn-directions" onclick="window.open('https://maps.google.com', '_blank')">Get Instant Driving Directions ↗</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reservation Popup Modal -->
+  <div class="modal-backdrop" id="bookingModal">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeBookingModal()">&times;</button>
+      <span class="badge-sub">FINE DINING TABLE</span>
+      <h3 style="font-size: 1.8rem; margin-bottom: 20px;" class="title-serif">Reserve A Table</h3>
+      
+      <form onsubmit="handleReservation(event)">
+        <div class="form-row">
+          <label>Full Name</label>
+          <input type="text" placeholder="E.g. Nishant Sharma" required>
+        </div>
+        <div class="form-row">
+          <label>Date & Time</label>
+          <input type="datetime-local" required>
+        </div>
+        <div class="form-row">
+          <label>Guests</label>
+          <select required>
+            <option>2 Diners (Couple's Table)</option>
+            <option>4 Diners (Standard Booth)</option>
+            <option>6+ Diners (Private Wine Room)</option>
+          </select>
+        </div>
+        <button type="submit" class="btn-modal-submit">Confirm Reservation</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Cart Slide-out Drawer -->
+  <div class="cart-drawer" id="cartDrawer">
+    <div class="cart-drawer-header">
+      <h3>Your Order</h3>
+      <button class="modal-close" style="position: static;" onclick="toggleCartDrawer()">&times;</button>
+    </div>
+    <ul class="cart-items-list" id="cartItemsList">
+      <li style="color: var(--text-dim); text-align: center; margin-top: 40px;">Your cart is currently empty.</li>
+    </ul>
+    <div class="cart-footer">
+      <div class="cart-total-row">
+        <span>Subtotal:</span>
+        <span id="cartTotalVal">$0</span>
+      </div>
+      <button class="btn-modal-submit" onclick="proceedToCheckout()">Proceed to Checkout</button>
+    </div>
+  </div>
+
+  <!-- Toast Notification Box -->
+  <div class="toast-msg" id="toastMsg">Dish added to order!</div>
+
+  <!-- Unified Functional Engine -->
+  <script>
+    let currentCategory = 'all';
+    let cartItems = [];
+
+    // Smooth Navigation
+    function scrollToSection(id) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    // Direct Category Filter
+    function applyCategory(cat, btn) {
+      currentCategory = cat;
+      const pills = document.querySelectorAll('.category-pill');
+      pills.forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      filterMenu();
+    }
+
+    // Search Box Listener
+    function runSearch(val) {
+      filterMenu();
+    }
+
+    // Filter Logic combining Category + Search
+    function filterMenu() {
+      const searchVal = document.getElementById('dishSearch').value.toLowerCase().trim();
+      const cards = document.querySelectorAll('.food-card');
+
+      cards.forEach(card => {
+        const cardCat = card.getAttribute('data-category');
+        const cardTitle = card.getAttribute('data-title').toLowerCase();
+
+        const matchCat = (currentCategory === 'all' || cardCat === currentCategory);
+        const matchSearch = cardTitle.includes(searchVal);
+
+        if (matchCat && matchSearch) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    // Heart Like Toggle
+    function toggleHeart(el) {
+      el.classList.toggle('liked');
+      if (el.classList.contains('liked')) {
+        showToast('Saved to your favorites ♥');
+      } else {
+        showToast('Removed from favorites');
+      }
+    }
+
+    // Cart Management
+    function addToCart(name, price) {
+      cartItems.push({ name, price });
+      updateCartUI();
+      showToast(`${name} added to order!`);
+    }
+
+    function updateCartUI() {
+      const badge = document.getElementById('cartCount');
+      badge.textContent = cartItems.length;
+
+      const list = document.getElementById('cartItemsList');
+      const totalEl = document.getElementById('cartTotalVal');
+
+      if (cartItems.length === 0) {
+        list.innerHTML = '<li style="color: var(--text-dim); text-align: center; margin-top: 40px;">Your cart is currently empty.</li>';
+        totalEl.textContent = '$0';
+        return;
+      }
+
+      list.innerHTML = '';
+      let sum = 0;
+      cartItems.forEach((item, idx) => {
+        sum += item.price;
+        const li = document.createElement('li');
+        li.className = 'cart-item-row';
+        li.innerHTML = `
+          <span class="cart-item-name">${item.name}</span>
+          <span class="cart-item-price">$${item.price}</span>
+        `;
+        list.appendChild(li);
+      });
+
+      totalEl.textContent = '$' + sum;
+    }
+
+    function toggleCartDrawer() {
+      const drawer = document.getElementById('cartDrawer');
+      drawer.classList.toggle('open');
+    }
+
+    function proceedToCheckout() {
+      if (cartItems.length === 0) {
+        showToast('Your cart is empty!');
+        return;
+      }
+      alert('Order placed successfully! Total: $' + cartItems.reduce((a,b)=>a+b.price, 0));
+      cartItems = [];
+      updateCartUI();
+      toggleCartDrawer();
+    }
+
+    // Reservation Modal Controls
+    function openBookingModal() {
+      document.getElementById('bookingModal').classList.add('active');
+    }
+
+    function closeBookingModal() {
+      document.getElementById('bookingModal').classList.remove('active');
+    }
+
+    document.getElementById('bookingModal').addEventListener('click', function(e) {
+      if (e.target === this) closeBookingModal();
+    });
+
+    function handleReservation(e) {
+      e.preventDefault();
+      closeBookingModal();
+      const ref = 'AUR-' + Math.floor(10000 + Math.random() * 90000);
+      alert('🎉 Table Reserved Successfully!\nYour Confirmation Code is: ' + ref);
+    }
+
+    // Dark / Light Theme Toggle
+    function toggleTheme() {
+      const body = document.body;
+      const themeBtn = document.getElementById('themeToggle');
+      if (body.getAttribute('data-theme') === 'dark') {
+        body.setAttribute('data-theme', 'light');
+        themeBtn.textContent = '☀️';
+      } else {
+        body.setAttribute('data-theme', 'dark');
+        themeBtn.textContent = '🌙';
+      }
+    }
+
+    // Toast Popups
+    function showToast(text) {
+      const toast = document.getElementById('toastMsg');
+      toast.textContent = text;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2400);
+    }
+  </script>
+</body>
+</html>
